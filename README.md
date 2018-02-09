@@ -35,7 +35,7 @@ $ [docker login command returned by "aws ecr get-login.."]
 Then build the application and image:
 ```
 $ ./gradlew build
-$ docker build -t example-app --rm=true
+$ docker build -t example-app --rm=true .
 ```
 Tag and push
 ```
