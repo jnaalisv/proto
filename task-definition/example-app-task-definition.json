@@ -1,0 +1,29 @@
+{
+    "family": "example-app",
+    "networkMode":"awsvpc",
+     "containerDefinitions": [
+         {
+          "name": "example-app",
+          "image": "787273180677.dkr.ecr.us-east-1.amazonaws.com/proto-example-app",
+          "cpu": 192,
+          "memoryReservation": 512,
+          "environment": [
+              { "name" : "AWS_REGION", "value" : "us-east-1" }
+          ],
+          "portMappings" : [
+              {
+                  "containerPort": 5000
+              }
+          ],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-group": "example-app",
+                  "awslogs-region": "us-east-1",
+                  "awslogs-stream-prefix": "proto-example-app/api"
+              }
+          }
+         }
+    ],
+    "taskRoleArn": "arn:aws:iam::787273180677:role/protoRole"
+}

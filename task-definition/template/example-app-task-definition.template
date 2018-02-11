@@ -1,0 +1,35 @@
+{
+    "family": "example-app",
+    "networkMode":"awsvpc",
+     "containerDefinitions": [
+         {
+          "name": "example-app",
+          "image": "$$ACCOUNT_ID$$.dkr.ecr.$$REGION$$.amazonaws.com/proto-example-app",
+          "cpu": 192,
+          "memoryReservation": 512,
+          "environment": [
+              { "name" : "AWS_REGION", "value" : "$$REGION$$" },
+          ],
+          "portMappings" : [
+              {
+                  "containerPort": 5000
+              }
+          ],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-group": "example-app",
+                  "awslogs-region": "$$REGION$$",
+                  "awslogs-stream-prefix": "proto-example-app/api"
+              }
+          }
+         }
+    ],
+    "executionRoleArn": "arn:aws:iam::$$ACCOUNT_ID$$:role/protoExecutionRole",
+    "taskRoleArn": "arn:aws:iam::$$ACCOUNT_ID$$:role/protoRole",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": ".25 vcpu",
+    "memory": "1 gb"
+}
